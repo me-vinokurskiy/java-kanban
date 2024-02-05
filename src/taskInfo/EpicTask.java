@@ -1,3 +1,5 @@
+package taskInfo;
+
 import java.util.HashMap;
 
 public class EpicTask extends Task{
@@ -12,11 +14,13 @@ public class EpicTask extends Task{
         subTaskHashMap.put(id, subTask);
     }
 
-
+    public HashMap<Integer, SubTask> getSubTaskHashMap() {
+        return subTaskHashMap;
+    }
 
     @Override
     public String toString() {
-        return "EpicTask{" +
+        return "taskInfo.EpicTask{" +
                 "subTaskHashMap=" + subTaskHashMap +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +

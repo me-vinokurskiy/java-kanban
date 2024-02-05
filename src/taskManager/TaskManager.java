@@ -1,3 +1,8 @@
+package taskManager;
+
+import taskInfo.*;
+import user.NewParameters;
+
 import java.util.HashMap;
 
 public class TaskManager {
@@ -41,9 +46,9 @@ public class TaskManager {
             updTask = (SubTask) task;
         }
 
-        if (parameters.getName() != null) updTask.name = parameters.getName();
-        if (parameters.getDescription() != null) updTask.description = parameters.getDescription();
-        if (parameters.getStatus() != null && updTask.getClass() != EpicTask.class) updTask.status = parameters.getStatus();
+        if (parameters.getName() != null) updTask.setName(parameters.getName());
+        if (parameters.getDescription() != null) updTask.setDescription(parameters.getDescription());
+        if (parameters.getStatus() != null && updTask.getClass() != EpicTask.class) updTask.setStatus(parameters.getStatus());
 
         database.saveToDatabase(id, updTask);
     }
@@ -64,4 +69,8 @@ public class TaskManager {
         database.remove(id);
     }
 
+    public HashMap<Integer, SubTask> getSubTasksListByEpicId(int id) {
+        EpicTask epicTask = (EpicTask) getTaskFromDatabaseById(id);
+        return epicTask.getSubTaskHashMap();
+    }
 }

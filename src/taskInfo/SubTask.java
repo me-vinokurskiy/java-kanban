@@ -1,3 +1,5 @@
+package taskInfo;
+
 public class SubTask extends Task {
 
     public SubTask(String name, String description, TaskType taskType, Status status, int id) {
@@ -7,7 +9,7 @@ public class SubTask extends Task {
 
     @Override
     public String toString() {
-        return "SubTask{" +
+        return "taskInfo.SubTask{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", taskType=" + taskType +

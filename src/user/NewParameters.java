@@ -1,3 +1,7 @@
+package user;
+
+import taskInfo.Status;
+
 public class NewParameters {
     private String name;
     private String description;
