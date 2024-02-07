@@ -1,7 +1,8 @@
 package taskInfo;
 
 public enum TaskType {
-    SIMPLE,
+    TASK,
     EPIC,
     SUB
+
 }
