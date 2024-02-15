@@ -1,4 +1,4 @@
-package user;
+package dto;
 
 import taskInfo.Status;
 import taskInfo.TaskType;

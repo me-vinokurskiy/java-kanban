@@ -1,12 +1,11 @@
 package taskInfo;
 
-public class Subtask extends AbstractTask{
+public class Subtask extends Task{
     private final int epicID;
 
 
     public Subtask(String name, String description, Status status, TaskType type, int id, int epicID) {
-        super(name, description, status, type);
-        this.id = id;
+        super(name, description, status, type, id);
         this.epicID = epicID;
     }
 
@@ -14,7 +13,7 @@ public class Subtask extends AbstractTask{
         return epicID;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Subtask{" +
                 "epicID=" + epicID +
@@ -24,7 +23,7 @@ public class Subtask extends AbstractTask{
                 ", type=" + type +
                 ", id=" + id +
                 '}';
-    }
+    }*/
 
     @Override
     public int hashCode() {

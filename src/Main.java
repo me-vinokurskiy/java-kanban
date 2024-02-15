@@ -1,9 +1,13 @@
 import taskInfo.*;
-import taskManager.Manager;
-import user.NewParameter;
+
+import taskManager.TaskManager;
+import dto.NewParameter;
+import util.Managers;
 
 public class Main {
     public static void main(String[] args) {
+        final TaskManager taskManager = Managers.getDefault();
+
 //  Создание обычного таска
         NewParameter task_0 = new NewParameter();
         task_0.setName("T1");
@@ -30,17 +34,27 @@ public class Main {
         sub_2.setStatus(Status.DONE);
         sub_2.setEpicId(1);
 
-        Manager taskManager = new Manager();
 //  Сохранение всех созданных задач
         taskManager.addNewTask(task_0);
         taskManager.addNewTask(epic_1);
         taskManager.addNewTask(sub_1);
         taskManager.addNewTask(sub_2);
 //  Вывод каждого таска по ID
-        /*System.out.println(taskManager.getTaskById(0));
+
+        System.out.println(taskManager.getTaskById(0));
         System.out.println(taskManager.getTaskById(1));
         System.out.println(taskManager.getTaskById(2));
-        System.out.println(taskManager.getTaskById(3));*/
+        System.out.println(taskManager.getTaskById(3));
+        System.out.println(taskManager.getTaskById(3));
+        System.out.println(taskManager.getTaskById(2));
+        System.out.println(taskManager.getTaskById(1));
+        System.out.println(taskManager.getTaskById(0));
+        System.out.println(taskManager.getTaskById(0));
+        System.out.println(taskManager.getTaskById(1));
+        System.out.println(taskManager.getTaskById(2));
+        System.out.println(taskManager.getTaskById(3));
+
+
 
 //  Создание новых данных для, например, сабтаска 2
         NewParameter newSubtask = new NewParameter();
@@ -50,24 +64,26 @@ public class Main {
         newSubtask.setStatus(Status.DONE); // изменился статус -> изменится статус эпика 1
 //  Обновление данных сабтаска 2
         taskManager.updateAnyTask(newSubtask, 2);
-//  Проверка данных эпика 1
-        //System.out.println(taskManager.getTaskById(1));
-//  Удаление сабтаска 1 и сабтаска 2
-        //taskManager.removeTaskById(2);
-        //taskManager.removeTaskById(3);
-//  Проверка данных эпика 1
-        System.out.println(taskManager.getTaskById(1));
-//  Удаление всех тасков заданного типа
-        taskManager.removeTasksByType(Task.class);
-        //taskManager.removeTasksByType(Epic.class); //  Удаление эпика также удаляет все его подзадачи
-        //taskManager.removeTasksByType(Subtask.class);  // Удаление сабтаска также удаляет связь с ним в эпике
-        System.out.println(taskManager.getTaskById(0));
-        System.out.println(taskManager.getTaskById(1));
-        System.out.println(taskManager.getTaskById(2));
-        System.out.println(taskManager.getTaskById(3));
-//  Получение списка подзадач определённого эпика
-        System.out.println(taskManager.getSubtasksOfEpic(1));
-//  Получение списка всех задач заданного типа
-        System.out.println(taskManager.getCurrentClassTaskList(Epic.class));
+
+        printAllTasks(taskManager);
+    }
+
+    private static void printAllTasks(TaskManager manager) {
+        System.out.println("Задачи:");
+        for (Object task : manager.getCurrentClassTaskList(Task.class)) {
+            System.out.println(task);
+        }
+        System.out.println("Эпики:");
+        for (Object epic : manager.getCurrentClassTaskList(Epic.class)) {
+            System.out.println(epic);
+        }
+        System.out.println("Подзадачи:");
+        for (Object subtask : manager.getCurrentClassTaskList(Subtask.class)) {
+            System.out.println(subtask);
+        }
+        System.out.println("История:");
+        for (Task task : manager.getInMemoryHistory()) {
+            System.out.println(task);
+        }
     }
 }

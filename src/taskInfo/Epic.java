@@ -2,19 +2,18 @@ package taskInfo;
 
 import java.util.ArrayList;
 
-public class Epic extends AbstractTask{
+public class Epic extends Task{
     private final ArrayList<Integer> subtasks = new ArrayList<>();
 
     public Epic(String name, String description, Status status, TaskType type, int id) {
-        super(name, description, status, type);
-        this.id = id;
+        super(name, description, status, type, id);
     }
 
     public ArrayList<Integer> getSubtasks() {
         return subtasks;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Epic{" +
                 "subtasks=" + subtasks +
@@ -24,7 +23,7 @@ public class Epic extends AbstractTask{
                 ", type=" + type +
                 ", id=" + id +
                 '}';
-    }
+    }*/
 
     @Override
     public int hashCode() {
