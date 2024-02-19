@@ -1,25 +1,19 @@
 package taskManager;
 
 import taskInfo.Subtask;
-import dto.NewParameter;
 import taskInfo.Task;
+import dto.TaskParameters;
 
 import java.util.ArrayList;
 
 public interface TaskManager {
-    void addNewTask(NewParameter parameters);
-
-    void removeTasksByType(Class<?> taskClass);
-
-    void removeTaskById(int id);
-
-    Object getTaskById(int id);
-
-    ArrayList<Subtask> getSubtasksOfEpic(int epicId);
-
-    void updateAnyTask(NewParameter parameters, int id);
-
-    ArrayList<Object> getCurrentClassTaskList(Class<?> taskClass);
-
-    ArrayList<Task> getInMemoryHistory();
+    void add(TaskParameters parameters);
+    void update(int id, TaskParameters parameters);
+    Task get(int id);
+    ArrayList<Task> getAllByType(Class<?> type);
+    ArrayList<Subtask> getSubtasks(int epicId);
+    ArrayList<Task> getHistory();
+    void delete(Integer id);
+    void deleteAllByType(Class<?> type);
+    void printAllTasks();
 }

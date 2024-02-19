@@ -1,37 +1,41 @@
 package taskInfo;
 
-public class Subtask extends Task{
-    private final int epicID;
+import java.util.Objects;
 
-
-    public Subtask(String name, String description, Status status, TaskType type, int id, int epicID) {
-        super(name, description, status, type, id);
-        this.epicID = epicID;
+public final class Subtask extends Task{
+    final int epicId;
+    public Subtask(String name, String description, Status status, int id, int epicId) {
+        super(name, description, status, id);
+        this.epicId = epicId;
     }
 
-    public int getEpicID() {
-        return epicID;
+    public int getEpicId() {
+        return epicId;
     }
-
-    /*@Override
-    public String toString() {
-        return "Subtask{" +
-                "epicID=" + epicID +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", status=" + status +
-                ", type=" + type +
-                ", id=" + id +
-                '}';
-    }*/
-
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Subtask subtask = (Subtask) o;
+        return Objects.equals(name, subtask.name) &&
+                Objects.equals(description, subtask.description) &&
+                Objects.equals(status, subtask.status) &&
+                this.id == subtask.id &&
+                epicId == subtask.epicId;
+    }
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(super.hashCode(), epicId);
     }
-
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public String toString() {
+        return "Subtask{" +
+                "epicId=" + epicId +
+                ", name='" + name + '\'' +
+                ", desc='" + description + '\'' +
+                ", status=" + status +
+                ", id=" + id +
+                '}';
     }
 }

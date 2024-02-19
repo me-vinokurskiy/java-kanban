@@ -8,10 +8,9 @@ import taskManager.TaskManager;
 public class Managers {
 
     public static TaskManager getDefault() {
-        return new InMemoryTaskManager(getDefaultHistory());
+        return new InMemoryTaskManager(getDefaultHIstoryManager());
     }
-
-    private static HistoryManager getDefaultHistory() {
+    private static HistoryManager getDefaultHIstoryManager() {
         return new InMemoryHistoryManager();
     }
 }
