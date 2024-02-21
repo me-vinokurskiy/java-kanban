@@ -5,20 +5,6 @@ import util.Managers;
 
 public class Main {
     public static void main(String[] args) {
-        TaskManager manager = createManager();
-
-
-        manager.deleteAllByType(Task.class);
-        //manager.deleteAllByType(Subtask.class);
-        //manager.deleteAllByType(Epic.class);
-
-
-
-        manager.printAllTasks();
-
-    }
-
-    static TaskManager createManager() {
         TaskManager manager = Managers.getDefault();
 
         TaskParameters task0 = new TaskParameters();
@@ -65,14 +51,32 @@ public class Main {
         sub3.setType(TaskType.SUB);
         sub3.setEpicId(3);
 
-        manager.add(task0);
-        manager.add(task1);
-        manager.add(epic0);
-        manager.add(epic1);
-        manager.add(sub0);
-        manager.add(sub1);
-        manager.add(sub2);
-        manager.add(sub3);
-        return manager;
+        final int id0 = manager.add(task0);
+        final int id1 = manager.add(task1);
+        final int id2 = manager.add(epic0);
+        final int id3 = manager.add(epic1);
+        final int id4 = manager.add(sub0);
+        final int id5 = manager.add(sub1);
+        final int id6 = manager.add(sub2);
+        final int id7 = manager.add(sub3);
+
+
+        //manager.deleteAllByType(Task.class);
+        //manager.deleteAllByType(Subtask.class);
+        //manager.deleteAllByType(Epic.class);
+
+
+
+        manager.printAllTasks();
+
+        System.out.println(manager.get(id0));
+        System.out.println(manager.get(id1));
+        System.out.println(manager.get(id2));
+        System.out.println(manager.get(id3));
+        System.out.println(manager.get(id4));
+        System.out.println(manager.get(id5));
+        System.out.println(manager.get(id6));
+        System.out.println(manager.get(id7));
+
     }
 }

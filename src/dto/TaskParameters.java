@@ -8,7 +8,7 @@ public class TaskParameters {
     private String description;
     private Status status;
     private TaskType type;
-    private int epicId;
+    private Integer epicId;
 
     public String getName() {
         return name;
@@ -34,7 +34,7 @@ public class TaskParameters {
     public void setType(TaskType type) {
         this.type = type;
     }
-    public int getEpicId() {
+    public Integer getEpicId() {
         return epicId;
     }
     public void setEpicId(int epicId) {

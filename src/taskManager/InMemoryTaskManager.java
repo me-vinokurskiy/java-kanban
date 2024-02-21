@@ -7,17 +7,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class InMemoryTaskManager implements TaskManager {
-    private static int idCounter = 0;
+    private static int idCounter;
     private final HashMap<Integer, Task> database;
     HistoryManager historyManager;
 
     public InMemoryTaskManager(HistoryManager historyManager) {
+        idCounter = 0;
         database = new HashMap<>();
         this.historyManager = historyManager;
     }
 
     @Override
-    public void add(TaskParameters parameters) {
+    public int add(TaskParameters parameters) {
         int id = idCounter++;
         switch (parameters.getType()) {
             case TASK:
@@ -39,33 +40,39 @@ public class InMemoryTaskManager implements TaskManager {
                 database.put(id, newEpic);
                 break;
             case SUB:
-                final Subtask newSubtask = new Subtask(
-                        parameters.getName(),
-                        parameters.getDescription(),
-                        Status.NEW,
-                        id,
-                        parameters.getEpicId()
-                );
-                database.put(id, newSubtask);
-                final Integer epicId = parameters.getEpicId();
-                Epic epic = (Epic) database.get(epicId);
-                epic.addSubtask(id);
+                if (database.containsKey(parameters.getEpicId())) {
+                    final Subtask newSubtask = new Subtask(
+                            parameters.getName(),
+                            parameters.getDescription(),
+                            Status.NEW,
+                            id,
+                            parameters.getEpicId()
+                    );
+                    final int epicId = parameters.getEpicId();
+                    final Epic epic = (Epic) database.get(epicId);
+                    epic.addSubtask(id);
+                    database.put(id, newSubtask);
+                    break;
+                }
         }
+        return id;
     }
 
     @Override
-    public void update(int id, TaskParameters parameters) {
-        final Task task = database.get(id);
-        if (parameters.getName() != null) task.setName(parameters.getName());
-        if (parameters.getDescription() != null) task.setDescription(parameters.getDescription());
-        if (parameters.getStatus() != null && task.getClass() != Epic.class) task.setStatus(parameters.getStatus());
-        database.put(id, task);
-        checkStatus();
+    public void update(Integer id, TaskParameters parameters) {
+        if (database.get(id) != null) {
+            final Task task = database.get(id);
+            if (parameters.getName() != null) task.setName(parameters.getName());
+            if (parameters.getDescription() != null) task.setDescription(parameters.getDescription());
+            if (parameters.getStatus() != null && task.getClass() != Epic.class) task.setStatus(parameters.getStatus());
+            database.put(id, task);
+            checkStatus();
+        }
 
     }
 
     @Override
-    public Task get(int id) {
+    public Task get(Integer id) {
         historyManager.add(database.get(id));
         return database.get(id);
     }
@@ -98,6 +105,7 @@ public class InMemoryTaskManager implements TaskManager {
     public ArrayList<Task> getHistory() {
         return historyManager.getHistory();
     }
+
     @Override
     public void delete(Integer id) {
         final Task task = database.get(id);
@@ -121,6 +129,7 @@ public class InMemoryTaskManager implements TaskManager {
             checkStatus();
         }
     }
+
     @Override
     public void deleteAllByType(Class<?> type) {
         if (type == Subtask.class) {
@@ -148,6 +157,7 @@ public class InMemoryTaskManager implements TaskManager {
         }
         database.entrySet().removeIf(e -> e.getValue() == null);
     }
+
     private void checkStatus() {
         for (Integer id : database.keySet()) {
             if (database.get(id).getClass() == Epic.class) {
@@ -178,6 +188,7 @@ public class InMemoryTaskManager implements TaskManager {
             }
         }
     }
+
     @Override
     public void printAllTasks() {
         for (Integer id : database.keySet()) System.out.println(database.get(id));

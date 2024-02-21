@@ -7,9 +7,9 @@ import dto.TaskParameters;
 import java.util.ArrayList;
 
 public interface TaskManager {
-    void add(TaskParameters parameters);
-    void update(int id, TaskParameters parameters);
-    Task get(int id);
+    int add(TaskParameters parameters);
+    void update(Integer id, TaskParameters parameters);
+    Task get(Integer id);
     ArrayList<Task> getAllByType(Class<?> type);
     ArrayList<Subtask> getSubtasks(int epicId);
     ArrayList<Task> getHistory();
