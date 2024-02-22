@@ -11,7 +11,7 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void add(Task task) {
-        if (!history.contains(task)) {
+        if (history.contains(task)) {
             history.remove(task);
         }
 

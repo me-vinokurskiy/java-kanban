@@ -72,11 +72,7 @@ public class Main {
         System.out.println(manager.get(id0));
         System.out.println(manager.get(id1));
         System.out.println(manager.get(id2));
-        System.out.println(manager.get(id3));
-        System.out.println(manager.get(id4));
-        System.out.println(manager.get(id5));
-        System.out.println(manager.get(id6));
-        System.out.println(manager.get(id7));
+        System.out.println(manager.get(id1));
 
         System.out.println(manager.getHistory());
 
