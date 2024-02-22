@@ -2,13 +2,14 @@ package taskManager;
 
 import dto.TaskParameters;
 import taskInfo.*;
-
+import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class InMemoryTaskManager implements TaskManager {
     private static int idCounter;
-    private final HashMap<Integer, Task> database;
+    private final Map<Integer, Task> database;
     HistoryManager historyManager;
 
     public InMemoryTaskManager(HistoryManager historyManager) {
@@ -78,8 +79,8 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<Task> getAllByType(Class<?> type) {
-        final ArrayList<Task> tasks = new ArrayList<>();
+    public List<Task> getAllByType(Class<?> type) {
+        final List<Task> tasks = new ArrayList<>();
         for (Integer id : database.keySet()) {
             if (database.get(id).getClass() == type) {
                 tasks.add(database.get(id));
@@ -90,8 +91,8 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<Subtask> getSubtasks(int epicId) {
-        final ArrayList<Subtask> subtasks = new ArrayList<>();
+    public List<Subtask> getSubtasks(int epicId) {
+        final List<Subtask> subtasks = new ArrayList<>();
         final Epic epic = (Epic) database.get(epicId);
         if (epic.getSubtasks().isEmpty()) return null;
         for (Integer id : epic.getSubtasks()) {
@@ -102,7 +103,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<Task> getHistory() {
+    public List<Task> getHistory() {
         return historyManager.getHistory();
     }
 
@@ -137,7 +138,7 @@ public class InMemoryTaskManager implements TaskManager {
                 if (database.get(id).getClass() == Subtask.class) {
                     final Subtask subtask = (Subtask) database.get(id);
                     final Epic epic = (Epic) database.get(subtask.getEpicId());
-                    final ArrayList<Integer> subtasks = epic.getSubtasks();
+                    final List<Integer> subtasks = epic.getSubtasks();
                     subtasks.remove(id);
                     database.replace(id, null);
                 }
@@ -162,7 +163,7 @@ public class InMemoryTaskManager implements TaskManager {
         for (Integer id : database.keySet()) {
             if (database.get(id).getClass() == Epic.class) {
                 Epic epic = (Epic) database.get(id);
-                ArrayList<Integer> subtasks = epic.getSubtasks();
+                List<Integer> subtasks = epic.getSubtasks();
                 int isDone = -1;
                 int isNew = -1;
                 for (Integer subtaskId : subtasks) {

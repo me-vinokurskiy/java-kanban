@@ -7,6 +7,7 @@ import taskManager.TaskManager;
 import util.Managers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -120,7 +121,7 @@ class InMemoryTaskManagerTest {
         tasks.add(testTask);
         tasks.add(testTask1);
 
-        final ArrayList<Task> testTasks = manager.getAllByType(Task.class);
+        final List<Task> testTasks = manager.getAllByType(Task.class);
         assertNotNull(testTasks, "Список задач не найден");
         assertEquals(tasks, testTasks, "Списки не совпадают");
     }
@@ -143,7 +144,7 @@ class InMemoryTaskManagerTest {
 
         int subtaskId = manager.add(dto1);
 
-        final ArrayList<Subtask> savedSubtasks = manager.getSubtasks(epicId);
+        final List<Subtask> savedSubtasks = manager.getSubtasks(epicId);
         final ArrayList<Subtask> testSubtasks = new ArrayList<>();
         final Subtask subtask = new Subtask("Sub", "subDesc", Status.NEW, subtaskId, epicId);
         testSubtasks.add(subtask);
@@ -171,8 +172,8 @@ class InMemoryTaskManagerTest {
         final Task task2 = manager.get(epicId2);
         final Task task3 = manager.get(epicId3);
 
-        final ArrayList<Task> testHistory = manager.getHistory();
-        final ArrayList<Task> history = new ArrayList<>();
+        final List<Task> testHistory = manager.getHistory();
+        final List<Task> history = new ArrayList<>();
         history.add(task0);
         history.add(task1);
         history.add(task2);
@@ -193,10 +194,10 @@ class InMemoryTaskManagerTest {
 
         int taskId0 = manager.add(dto);
 
-        final ArrayList<Task> tasks = manager.getAllByType(Task.class);
+        final List<Task> tasks = manager.getAllByType(Task.class);
         assertEquals(1, tasks.size());
         manager.delete(taskId0);
-        final ArrayList<Task> testTasks = manager.getAllByType(Task.class);
+        final List<Task> testTasks = manager.getAllByType(Task.class);
         assertNull(testTasks, "Задача не удалена.");
     }
 
@@ -215,12 +216,12 @@ class InMemoryTaskManagerTest {
         manager.add(dto);
         manager.add(dto2);
 
-        final ArrayList<Task> tasks = manager.getAllByType(Task.class);
+        final List<Task> tasks = manager.getAllByType(Task.class);
         assertEquals(2, tasks.size());
 
         manager.deleteAllByType(Task.class);
 
-        final ArrayList<Task> testTasks = manager.getAllByType(Task.class);
+        final List<Task> testTasks = manager.getAllByType(Task.class);
         assertNull(testTasks, "Задачи не удалена.");
     }
 }

@@ -5,9 +5,9 @@ import taskInfo.Status;
 import taskInfo.Task;
 import taskManager.HistoryManager;
 import taskManager.InMemoryHistoryManager;
-import util.Managers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,7 +19,7 @@ class InMemoryHistoryManagerTest {
         final HistoryManager historyManager = new InMemoryHistoryManager();
         historyManager.add(new Task("Name", "Desc", Status.NEW, 0));
         historyManager.add(new Task("Name", "Desc", Status.NEW, 1));
-        final ArrayList<Task> history = historyManager.getHistory();
+        final List<Task> history = historyManager.getHistory();
         assertNotNull(history, "History is not empty");
         assertEquals(2,history.size());
     }
@@ -39,8 +39,8 @@ class InMemoryHistoryManagerTest {
         historyManager.add(new Task("Name", "Desc", Status.NEW, 9));
         historyManager.add(new Task("Name", "Desc", Status.NEW, 10));
         historyManager.add(new Task("Name", "Desc", Status.NEW, 11));
-        final ArrayList<Task> history = historyManager.getHistory();
-        final ArrayList<Task> testHistory = new ArrayList<>();
+        final List<Task> history = historyManager.getHistory();
+        final List<Task> testHistory = new ArrayList<>();
         testHistory.add(new Task("Name", "Desc", Status.NEW, 2));
         testHistory.add(new Task("Name", "Desc", Status.NEW, 3));
         testHistory.add(new Task("Name", "Desc", Status.NEW, 4));

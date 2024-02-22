@@ -78,5 +78,7 @@ public class Main {
         System.out.println(manager.get(id6));
         System.out.println(manager.get(id7));
 
+        System.out.println(manager.getHistory());
+
     }
 }

@@ -5,6 +5,7 @@ import taskInfo.Epic;
 import taskInfo.Status;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,7 +14,7 @@ class EpicTest {
     @Test
     void addSubtask() {
         final Epic epic = new Epic("Epic", "Desc", Status.NEW, 0);
-        final ArrayList<Integer> subtasks = epic.getSubtasks();
+        final List<Integer> subtasks = epic.getSubtasks();
 
         subtasks.add(0);
         subtasks.add(1);
@@ -25,12 +26,12 @@ class EpicTest {
     @Test
     void getSubtasks() {
         final Epic epic = new Epic("Epic", "Desc", Status.NEW, 0);
-        final ArrayList<Integer> subtasks = epic.getSubtasks();
+        final List<Integer> subtasks = epic.getSubtasks();
 
         subtasks.add(0);
         subtasks.add(1);
 
-        final ArrayList<Integer> savedSubtasks = epic.getSubtasks();
+        final List<Integer> savedSubtasks = epic.getSubtasks();
 
         final ArrayList<Integer> testSubtasks = new ArrayList<>();
         testSubtasks.add(0);
@@ -43,7 +44,7 @@ class EpicTest {
     @Test
     void removeSubtask() {
         final Epic epic = new Epic("Epic", "Desc", Status.NEW, 0);
-        final ArrayList<Integer> subtasks = epic.getSubtasks();
+        final List<Integer> subtasks = epic.getSubtasks();
 
         subtasks.add(0);
         subtasks.add(1);

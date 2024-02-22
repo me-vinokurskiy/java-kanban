@@ -4,15 +4,15 @@ import taskInfo.Subtask;
 import taskInfo.Task;
 import dto.TaskParameters;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface TaskManager {
     int add(TaskParameters parameters);
     void update(Integer id, TaskParameters parameters);
     Task get(Integer id);
-    ArrayList<Task> getAllByType(Class<?> type);
-    ArrayList<Subtask> getSubtasks(int epicId);
-    ArrayList<Task> getHistory();
+    List<Task> getAllByType(Class<?> type);
+    List<Subtask> getSubtasks(int epicId);
+    List<Task> getHistory();
     void delete(Integer id);
     void deleteAllByType(Class<?> type);
     void printAllTasks();
